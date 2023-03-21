@@ -1,4 +1,4 @@
-package com.mvitu.MvituBackend.goods.GoodsDao;
+package com.mvitu.MvituBackend.goods.GoodUtil;
 
 public class GoodFields {
     public static String good_name="good_name";

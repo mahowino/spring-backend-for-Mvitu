@@ -12,21 +12,21 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class GoodsService {
+public class GoodVariantService {
 
     static Firestore db= FirestoreClient.getFirestore();
 
-    public List<Good> getGoods() throws ExecutionException, InterruptedException {
+    public List<Good> getVariantGoods() throws ExecutionException, InterruptedException {
         Query query=db.collection(GoodsCollections.GOODS);
         return GoodsDao.getGoodsFromFirestore(query);
     }
 
-    public void addGoods(Good good){
+    public void addVariantGoods(Good good){
         DocumentReference reference=db.collection(GoodsCollections.GOODS).document();
         GoodsDao.addGoodsToFirestore(reference,good);
     }
 
-    //later
+    //todo: add edit and delete good variant functionality
     public void deleteGood(Good good){
         Query query=db.collection(GoodsCollections.GOODS);
         GoodsDao.deleteGoodFromFirestore(good);
@@ -36,5 +36,4 @@ public class GoodsService {
         Query query=db.collection(GoodsCollections.GOODS);
         GoodsDao.editFoodsFromFirestore(good);
     }
-
 }

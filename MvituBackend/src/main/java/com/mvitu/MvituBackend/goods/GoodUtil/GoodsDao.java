@@ -1,6 +1,7 @@
-package com.mvitu.MvituBackend.goods.GoodsDao;
+package com.mvitu.MvituBackend.goods.GoodUtil;
 
 import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -10,23 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public abstract class GoodsUtil {
+public abstract class GoodsDao {
     public static List<Good> getGoodsFromFirestore(Query query) throws ExecutionException, InterruptedException {
         List<Good> goods=new ArrayList<>();
         ApiFuture<QuerySnapshot> future=query.get();
         QuerySnapshot snapshot=future.get();
         for (DocumentSnapshot snap :snapshot.getDocuments()) {
-            goods.add(GoodsUtil.getCourseFromSnapshot(snap));
+            goods.add(GoodUtil.getCourseFromSnapshot(snap));
         }
         return goods;
     }
-    protected static Good getCourseFromSnapshot(DocumentSnapshot snap) {
-        return Good.builder()
-                .good_name(snap.get(GoodFields.good_name).toString())
-                .good_description(snap.get(GoodFields.good_description).toString())
-                .good_category(snap.get(GoodFields.good_category).toString())
-                .build();
+
+
+    public static void addGoodsToFirestore(DocumentReference reference, Good good) {
+        reference.set(GoodUtil.createMapFromGood(good));
+    }
+
+    public static void deleteGoodFromFirestore(Good good) {
 
     }
 
+    public static void editFoodsFromFirestore(Good good) {
+    }
 }
