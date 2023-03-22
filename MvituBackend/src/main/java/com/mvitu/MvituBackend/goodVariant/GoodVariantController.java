@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/api/v1/good-variant")
+@RequestMapping("/api/v1/good-variants")
 public class GoodVariantController {
 
     @Autowired
     GoodVariantService service;
 
-    @GetMapping("/good-type")
+    @GetMapping("/")
     public ResponseEntity<List<GoodVariant>> getGoods(@RequestParam String good_id) throws ExecutionException, InterruptedException {
     return ResponseEntity.ok(service.getGoods(good_id));
     }

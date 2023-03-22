@@ -21,9 +21,10 @@ public class GoodsService {
         return GoodsDao.getGoodsFromFirestore(query);
     }
 
-    public void addGoods(Good good){
+    public String addGoods(Good good){
         DocumentReference reference=db.collection(GoodsCollections.GOODS).document();
         GoodsDao.addGoodsToFirestore(reference,good);
+        return reference.getId();
     }
 
     //later

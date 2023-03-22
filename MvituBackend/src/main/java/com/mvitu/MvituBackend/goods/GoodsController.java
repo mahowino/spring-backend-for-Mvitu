@@ -15,14 +15,13 @@ public class GoodsController {
     @Autowired
     GoodsService service;
 
-    @GetMapping("/good")
-    public ResponseEntity<List<Good>> getGoods(@RequestParam String good_id) throws ExecutionException, InterruptedException {
+    @GetMapping("/")
+    public ResponseEntity<List<Good>> getGoods() throws ExecutionException, InterruptedException {
         return ResponseEntity.ok(service.getGoods());
     }
 
     @PostMapping("/add")
-    public ResponseEntity addGoodVariant(@RequestParam String goodId, @RequestBody Good good){
-        service.addGoods(good);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    public ResponseEntity<String> addGoodVariant(@RequestBody Good good){
+        return ResponseEntity.status(200).body(service.addGoods(good));
     }
 }

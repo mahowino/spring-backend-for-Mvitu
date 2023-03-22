@@ -26,7 +26,7 @@ public class GoodVariantService {
     }
 
     public void addGoodVariant(GoodVariant good,String goodId){
-        DocumentReference reference=db.collection(GoodVariantCollections.GOOD_TYPE).document(goodId);
+        DocumentReference reference=db.collection(GoodsCollections.GOODS).document(goodId).collection(GoodVariantCollections.GOOD_TYPE).document();
         GoodVariantDao.addGoodsToFirestore(reference,good);
     }
 
